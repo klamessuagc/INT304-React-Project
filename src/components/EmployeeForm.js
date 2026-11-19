@@ -23,7 +23,25 @@ class EmployeeForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Employee Information:", this.state);
+    const employee = {
+      name: this.state.name,
+      email: this.state.email,
+      title: this.state.title,
+      department: this.state.department
+    };
+
+    const savedEmployees = JSON.parse(
+      localStorage.getItem("employees") || "[]"
+    );
+
+    savedEmployees.push(employee);
+
+    localStorage.setItem(
+      "employees",
+      JSON.stringify(savedEmployees)
+    );
+
+    alert("Employee saved successfully!");
 
     this.setState({
       name: "",
